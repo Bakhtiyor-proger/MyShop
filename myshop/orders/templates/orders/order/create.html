@@ -1,0 +1,31 @@
+{% extends "shop/base.html" %}
+
+{% block title %}
+  Tekshirish
+{% endblock %}
+
+{% block content %}
+  <h1>Tekshirish</h1>
+
+  <div class="order-info">
+    <h3>Sizning buyurtmangiz</h3>
+    <ul>
+      {% for item in cart %}
+        <li>
+          {{ item.quantity }}x {{ item.product.name }}
+          <span>${{ item.total_price }}</span>
+        </li>
+      {% endfor %}
+    </ul>
+    <p>Total: {{ cart.get_total_price }} so'm</p>
+  </div>
+
+  <form method="post" class="order-form">
+    {{ form.as_p }}
+    <p><input type="submit" value="Buyurtmani joylashtirish"></p>
+    {% csrf_token %}
+  </form>
+
+
+
+{% endblock %}
